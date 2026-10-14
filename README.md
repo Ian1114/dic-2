@@ -7,6 +7,10 @@
 - GitHub Repository: https://github.com/Ian1114/dic-2
 - Live Demo: https://ian1114.github.io/dic-2/
 
+## 網站畫面
+
+![DIC2 多元線性回歸互動網站畫面](assets/dic2.png)
+
 ## 更新模型資料
 
 先安裝 `requirements.txt` 中的 Python 套件，再執行：
