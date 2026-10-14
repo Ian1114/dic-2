@@ -4,13 +4,8 @@
 
 ## 開啟網站
 
-網站是純 HTML、CSS、JavaScript，不需安裝前端套件。用瀏覽器開啟 `index.html` 即可。也可以在 VS Code 終端機進入本資料夾後執行：
-
-```powershell
-python -m http.server 8765
-```
-
-再打開 `http://127.0.0.1:8765/`。
+- GitHub Repository: https://github.com/Ian1114/dic-2
+- Live Demo: https://ian1114.github.io/dic-2/
 
 ## 更新模型資料
 
