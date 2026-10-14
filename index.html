@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="互動比較 50 Startups 資料集的五種特徵選擇演算法與線性迴歸結果。">
+  <title>50 Startups｜特徵選擇互動分析</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="results.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top" aria-label="回到頁首"><span class="brand-mark">◫</span><span>AIoT <strong>DATA LAB</strong></span></a>
+      <span class="topbar-label">50 STARTUPS · MODEL EXPLORER</span>
+      <a class="topbar-link" href="https://app.notion.com/p/AIoT-DA-Lecture-6-3ebc47529811800d9832d32f2a286721" target="_blank" rel="noopener noreferrer">課程資料 ↗</a>
+    </div>
+  </header>
+
+  <main id="top" class="page">
+    <nav class="breadcrumb" aria-label="目前位置">課程實作 <span>／</span> 多元線性迴歸 <span>／</span> 特徵選擇</nav>
+
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> CRISP-DM · INTERACTIVE ANALYSIS</div>
+        <h1 id="page-title">用更少的特徵，<br><em>看清預測表現。</em></h1>
+        <p>以 50 Startups 資料集比較五種特徵選擇方式。切換演算法與特徵數，觀察測試集的 RMSE、R²、MAE 與選入欄位如何變化。</p>
+        <div class="hero-meta"><span>50 筆新創資料</span><span>40 訓練 / 10 測試</span><span>5 種演算法</span></div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-art-grid"></div>
+        <div class="hero-art-line"><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="hero-art-caption">MODEL PERFORMANCE / 01—05</div>
+      </div>
+    </section>
+
+    <section class="control-panel" aria-label="圖表控制">
+      <div class="control-head"><span class="section-index">01</span><div><h2>Select Feature Selection Algorithm</h2><p>選擇演算法，比較每種方法在不同特徵數下的結果。</p></div></div>
+      <div id="algorithm-controls" class="algorithm-controls" role="group" aria-label="Select Feature Selection Algorithm">
+        <button type="button" data-method="lasso">Lasso <small>L1 權重排序</small></button>
+        <button type="button" data-method="forward">Forward SFS <small>逐步選入</small></button>
+        <button type="button" data-method="rfe">RFE <small>遞迴剔除</small></button>
+        <button type="button" data-method="elasticnet">ElasticNet <small>L1 + L2</small></button>
+        <button type="button" data-method="exhaustive">Exhaustive <small>最佳子集</small></button>
+      </div>
+      <div class="control-divider"></div>
+      <div class="control-head"><span class="section-index">02</span><div><h2>Number of Features <span>(k = 1 to 5)</span></h2><p>選擇模型使用的欄位數，圖上會同步標示目前位置。</p></div></div>
+      <div id="k-controls" class="k-controls" role="group" aria-label="Number of Features">
+        <button type="button" data-k="1">k = 1</button>
+        <button type="button" data-k="2">k = 2 <span>最低 RMSE</span></button>
+        <button type="button" data-k="3">k = 3</button>
+        <button type="button" data-k="4">k = 4</button>
+        <button type="button" data-k="5">k = 5</button>
+      </div>
+    </section>
+
+    <section class="overview" aria-labelledby="overview-title">
+      <div class="section-heading"><div><span class="overline">MODEL SNAPSHOT</span><h2 id="overview-title">目前模型表現</h2></div><span id="selection-label" class="selection-label" aria-live="polite"></span></div>
+      <div class="metric-grid" aria-live="polite">
+        <article class="metric-card mint"><span>測試 RMSE <small>越低越好</small></span><strong id="metric-rmse"></strong><p>平均預測誤差的平方根，單位為美元</p></article>
+        <article class="metric-card violet"><span>R² 分數 <small>越高越好</small></span><strong id="metric-r2"></strong><p>對測試資料利潤變化的解釋程度</p></article>
+        <article class="metric-card blue"><span>測試 MAE <small>越低越好</small></span><strong id="metric-mae"></strong><p>預測利潤與實際利潤的平均差距</p></article>
+      </div>
+      <div class="active-features"><div><span class="overline">SELECTED PREDICTORS</span><h3>目前選入的特徵 <span id="feature-count"></span></h3></div><div id="feature-chips" class="feature-chips"></div></div>
+      <p id="method-note" class="method-note"></p>
+    </section>
+
+    <section class="charts-section" aria-labelledby="charts-title">
+      <div class="section-heading"><div><span class="overline">PERFORMANCE ACROSS K</span><h2 id="charts-title">看見模型如何隨特徵數變化</h2></div><button id="download-btn" class="download-btn" type="button">下載目前圖表 PNG ↓</button></div>
+      <div class="charts-grid">
+        <article class="chart-card"><div class="chart-header"><div><span class="chart-kicker">ERROR METRIC</span><h3>RMSE by Number of Features</h3></div><span class="chart-swatch mint-text">● TEST SET</span></div><p>越低越好。選擇 k 可查看對應數值。</p><div id="rmse-chart" class="chart-frame"></div></article>
+        <article class="chart-card"><div class="chart-header"><div><span class="chart-kicker">MODEL FIT</span><h3>R-squared by Number of Features</h3></div><span class="chart-swatch violet-text">● TEST SET</span></div><p>越高越好。圖上會標示目前選擇的 k。</p><div id="r2-chart" class="chart-frame"></div></article>
+      </div>
+    </section>
+
+    <section class="results-section" aria-labelledby="results-title"><div class="section-heading"><div><span class="overline">FULL COMPARISON</span><h2 id="results-title">五個特徵數的完整結果</h2></div></div><div class="table-wrap"><table><thead><tr><th scope="col">特徵數</th><th scope="col">選入特徵</th><th scope="col">RMSE</th><th scope="col">R²</th><th scope="col">MAE</th></tr></thead><tbody id="results-body"></tbody></table></div></section>
+
+    <aside class="methodology"><strong>資料與方法</strong><p>使用課程的 50_Startups.csv。州別以 California 為基準，80% 訓練、20% 測試（random_state=0）。演算法只在訓練集上選特徵；圖中分數則來自同一組保留測試集。部分演算法會選到相同欄位，因此曲線可能重疊。樣本僅 50 筆，這些數值適合課堂比較，不應視為穩定的商業預測保證。</p></aside>
+  </main>
+  <footer class="footer"><span>AIoT DATA LAB / 50 STARTUPS</span><span>資料來源：課程 50 Startups · 製作於 2026</span></footer>
+</body>
+</html>
