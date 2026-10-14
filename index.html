@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="互動比較 50 Startups 資料集的五種特徵選擇演算法與線性迴歸結果。">
-  <title>50 Startups｜特徵選擇互動分析</title>
+  <title>DIC2-多元線性回歸｜50-startup and boston housing</title>
   <link rel="stylesheet" href="styles.css">
   <script src="results.js" defer></script>
   <script src="app.js" defer></script>
@@ -24,7 +24,7 @@
     <section class="hero" aria-labelledby="page-title">
       <div class="hero-copy">
         <div class="eyebrow"><span class="eyebrow-dot"></span> CRISP-DM · INTERACTIVE ANALYSIS</div>
-        <h1 id="page-title">用更少的特徵，<br><em>看清預測表現。</em></h1>
+        <h1 id="page-title">DIC2-多元線性回歸<br><em>50-startup and boston housing</em></h1>
         <p>以 50 Startups 資料集比較五種特徵選擇方式。切換演算法與特徵數，觀察測試集的 RMSE、R²、MAE 與選入欄位如何變化。</p>
         <div class="hero-meta"><span>50 筆新創資料</span><span>40 訓練 / 10 測試</span><span>5 種演算法</span></div>
       </div>
@@ -78,6 +78,17 @@
 
     <aside class="methodology"><strong>資料與方法</strong><p>使用課程的 50_Startups.csv。州別以 California 為基準，80% 訓練、20% 測試（random_state=0）。演算法只在訓練集上選特徵；圖中分數則來自同一組保留測試集。部分演算法會選到相同欄位，因此曲線可能重疊。樣本僅 50 筆，這些數值適合課堂比較，不應視為穩定的商業預測保證。</p></aside>
   </main>
-  <footer class="footer"><span>AIoT DATA LAB / 50 STARTUPS</span><span>資料來源：課程 50 Startups · 製作於 2026</span></footer>
+  <footer class="footer">
+    <span>AIoT DATA LAB / 50 STARTUPS</span>
+    <details class="author-details">
+      <summary>製作者資訊</summary>
+      <div class="author-info">
+        <span>Ian.Li · 男 · 學號 5115056026</span>
+        <span>中興大學 · 資訊工程學系</span>
+        <a href="mailto:w115056026@mail.nchu.edu.tw">w115056026@mail.nchu.edu.tw</a>
+      </div>
+    </details>
+    <span>資料來源：課程 50 Startups · 製作於 2026</span>
+  </footer>
 </body>
 </html>
